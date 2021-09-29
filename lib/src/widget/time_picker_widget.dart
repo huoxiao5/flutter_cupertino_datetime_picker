@@ -269,12 +269,33 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
   }
 
   Widget _renderDatePickerItemComponent(int value, String format) {
+     TextStyle style = widget.pickerTheme.itemTextStyle;
+    if (widget.pickerTheme.selectedTextStyle != null) {
+      bool isSelected = false;
+
+      if (format.contains('H')) {
+        if (_currHour == value) {
+          isSelected = true;
+        }
+      } else if (format.contains('m')) {
+        if (_currMinute == value) {
+          isSelected = true;
+        }
+      } else if (format.contains('s')) {
+        if (_currSecond == value) {
+          isSelected = true;
+        }
+      }
+      if (isSelected) {
+        style = widget.pickerTheme.selectedTextStyle!;
+      }
+    }
     return Container(
       height: widget.pickerTheme.itemHeight,
       alignment: Alignment.center,
       child: Text(
         DateTimeFormatter.formatDateTime(value, format, widget.locale),
-        style: widget.pickerTheme.itemTextStyle,
+        style: style,
       ),
     );
   }
@@ -305,6 +326,7 @@ class _TimePickerWidgetState extends State<TimePickerWidget> {
     if (_currSecond != value) {
       _currSecond = value;
       _onSelectedChange();
+      setState(() {});
     }
   }
 
