@@ -1,5 +1,11 @@
 # Flutter Cupertino DateTime Picker
 
+
+### 更新：2021年09月29日  ，
+1. 添加样式 selectionOverlay ，可以自定义 CupertinoPicker 的选中的item样式，Flutter2.0后 CupertinoPicker默认添加 selectionOverlay=CupertinoPickerDefaultSelectionOverlay(),显示效果就是一个圆角的灰色矩形
+2. 添加样式 selectedTextStyle
+
+
 [[pub packages]](https://pub.dev/packages/flutter_cupertino_datetime_picker)
 | [中文说明](./README_zh-cn.md)
 
