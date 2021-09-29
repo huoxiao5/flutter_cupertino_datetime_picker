@@ -48,6 +48,7 @@ class DateTimePickerTheme with Diagnosticable {
     this.titleHeight: DATETIME_PICKER_TITLE_HEIGHT,
     this.itemHeight: DATETIME_PICKER_ITEM_HEIGHT,
     this.itemTextStyle: DATETIME_PICKER_ITEM_TEXT_STYLE,
+    this.selectionOverlay
   });
 
   static const DateTimePickerTheme Default = const DateTimePickerTheme();
