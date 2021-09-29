@@ -48,7 +48,8 @@ class DateTimePickerTheme with Diagnosticable {
     this.titleHeight: DATETIME_PICKER_TITLE_HEIGHT,
     this.itemHeight: DATETIME_PICKER_ITEM_HEIGHT,
     this.itemTextStyle: DATETIME_PICKER_ITEM_TEXT_STYLE,
-    this.selectionOverlay
+    this.selectionOverlay,
+    this.selectedTextStyle 
   });
 
   static const DateTimePickerTheme Default = const DateTimePickerTheme();
@@ -96,4 +97,7 @@ class DateTimePickerTheme with Diagnosticable {
   /// which is a gray rounded rectangle overlay in iOS 14 style.
   /// This property can be set to null to remove the overlay.
   final Widget? selectionOverlay;
+    
+  /// The value of DatePicker's selected column [TextStyle].
+  final TextStyle? selectedTextStyle; 
 }
