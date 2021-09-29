@@ -84,4 +84,15 @@ class DateTimePickerTheme with Diagnosticable {
 
   /// The value of DatePicker's column [TextStyle].
   final TextStyle itemTextStyle;
+   /// A widget overlaid on the picker to highlight the currently selected entry.
+  ///
+  /// The [selectionOverlay] widget drawn above the [CupertinoPicker]'s picker
+  /// wheel.
+  /// It is vertically centered in the picker and is constrained to have the
+  /// same height as the center row.
+  ///
+  /// If unspecified, it defaults to a [CupertinoPickerDefaultSelectionOverlay]
+  /// which is a gray rounded rectangle overlay in iOS 14 style.
+  /// This property can be set to null to remove the overlay.
+  final Widget? selectionOverlay;
 }
