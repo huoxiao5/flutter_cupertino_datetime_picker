@@ -198,7 +198,7 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
   void _onPressedConfirm() {
     if (widget.onConfirm != null) {
       DateTime dateTime =
-          DateTime(_currYear, _currMonth, _currDay, _currHour, _currMinute, 0);
+          DateTime(_currYear, _currMonth, _currDay, _currHour, _currMinute, _currSecond);
       widget.onConfirm!(dateTime, _calcSelectIndexList());
     }
     Navigator.pop(context);
@@ -208,7 +208,7 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
   void _onSelectedChange() {
     if (widget.onChange != null) {
       DateTime dateTime =
-          DateTime(_currYear, _currMonth, _currDay, _currHour, _currMinute, 0);
+          DateTime(_currYear, _currMonth, _currDay, _currHour, _currMinute, _currSecond);
       widget.onChange!(dateTime, _calcSelectIndexList());
     }
   }
@@ -265,6 +265,8 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
             _changeHourSelection(value);
           } else if (format.contains('m')) {
             _changeMinuteSelection(value);
+          } else if (format.contains('s')) {
+            _changeSecondSelection(value);
           }
         },
       );
@@ -329,12 +331,46 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
 
   /// render hour、minute、second picker item
   Widget _renderDatePickerItemComponent(int value, String format) {
+    TextStyle style = widget.pickerTheme.itemTextStyle;
+    if (widget.pickerTheme.selectedTextStyle != null) {
+      bool isSelected = false;
+
+      if (format.contains('y')) {
+        if (_currYear == value) {
+          isSelected = true;
+        }
+      } else if (format.contains('M')) {
+        if (_currMonth == value) {
+          isSelected = true;
+        }
+      } else if (format.contains('d')) {
+        if (_currDay == value) {
+          isSelected = true;
+        }
+      }
+      if (format.contains('H')) {
+        if (_currHour == value) {
+          isSelected = true;
+        }
+      } else if (format.contains('m')) {
+        if (_currMinute == value) {
+          isSelected = true;
+        }
+      } else if (format.contains('s')) {
+        if (_currSecond == value) {
+          isSelected = true;
+        }
+      }
+      if (isSelected) {
+        style = widget.pickerTheme.selectedTextStyle!;
+      }
+    }
     return Container(
       height: widget.pickerTheme.itemHeight,
       alignment: Alignment.center,
       child: Text(
         DateTimeFormatter.formatDateTime(value, format, widget.locale),
-        style: widget.pickerTheme.itemTextStyle,
+        style: style,
       ),
     );
   }
@@ -387,6 +423,17 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
       _currMinute = value;
       _changeTimeRange();
       _onSelectedChange();
+    }
+  }
+  
+  
+  /// change the selection of second picker
+  void _changeSecondSelection(int index) {
+    int value = _secondRange.first + index;
+    if (_currSecond != value) {
+      _currSecond = value;
+      _onSelectedChange();
+      setState(() {});
     }
   }
 
