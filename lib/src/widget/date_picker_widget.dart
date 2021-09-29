@@ -219,6 +219,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
           scrollController: scrollCtrl,
           itemExtent: widget.pickerTheme.itemHeight,
           onSelectedItemChanged: valueChanged,
+          selectionOverlay: widget.pickerTheme.selectionOverlay,
           childCount: valueRange.last - valueRange.first + 1,
           itemBuilder: (context, index) =>
               _renderDatePickerItemComponent(valueRange.first + index, format),
