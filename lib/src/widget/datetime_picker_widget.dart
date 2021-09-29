@@ -299,10 +299,11 @@ class _DateTimePickerWidgetState extends State<DateTimePickerWidget> {
       child: CupertinoPicker.builder(
         backgroundColor: widget.pickerTheme.backgroundColor,
         scrollController: scrollCtrl,
-        selectionOverlay: Container(
-            decoration: BoxDecoration(
-                border: Border.symmetric(
-                    horizontal: BorderSide(color: Colors.black26)))),
+        selectionOverlay: widget.pickerTheme.selectionOverlay,
+//         selectionOverlay: Container(
+//             decoration: BoxDecoration(
+//                 border: Border.symmetric(
+//                     horizontal: BorderSide(color: Colors.black26)))),
         itemExtent: widget.pickerTheme.itemHeight,
         onSelectedItemChanged: valueChanged,
         childCount: format.contains('m')
