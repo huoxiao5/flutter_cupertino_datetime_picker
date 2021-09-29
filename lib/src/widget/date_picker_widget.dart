@@ -229,12 +229,33 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
   }
 
   Widget _renderDatePickerItemComponent(int value, String format) {
+    TextStyle style = widget.pickerTheme.itemTextStyle;
+    if (widget.pickerTheme.selectedTextStyle != null) {
+      bool isSelected = false;
+
+      if (format.contains('y')) {
+        if (_currYear == value) {
+          isSelected = true;
+        }
+      } else if (format.contains('M')) {
+        if (_currMonth == value) {
+          isSelected = true;
+        }
+      } else if (format.contains('d')) {
+        if (_currDay == value) {
+          isSelected = true;
+        }
+      }
+      if (isSelected) {
+        style = widget.pickerTheme.selectedTextStyle!;
+      }
+    }
     return Container(
       height: widget.pickerTheme.itemHeight,
       alignment: Alignment.center,
       child: Text(
         DateTimeFormatter.formatDateTime(value, format, widget.locale),
-        style: widget.pickerTheme.itemTextStyle,
+        style: style,
       ),
     );
   }
@@ -265,6 +286,7 @@ class _DatePickerWidgetState extends State<DatePickerWidget> {
     if (_currDay != dayOfMonth) {
       _currDay = dayOfMonth;
       _onSelectedChange();
+      setState(() {});
     }
   }
 
